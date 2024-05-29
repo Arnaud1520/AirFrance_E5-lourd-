@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 17 avr. 2024 à 11:39
+-- Généré le : mer. 29 mai 2024 à 10:56
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -72,7 +72,8 @@ INSERT INTO `aeroports` (`ID_Aeroport`, `Nom`, `Localisation`) VALUES
 (12, 'Aéroport de New York-JFK (JFK)', 'États-Unis'),
 (13, 'Aéroport de Los Angeles International (LAX)', 'États-Unis'),
 (14, 'Aéroport de Londres-Heathrow (LHR)', 'Royaume-Uni'),
-(15, 'Aéroport de Tokyo-Narita (NRT)', 'Japon');
+(15, 'Aéroport de Tokyo-Narita (NRT)', 'Japon'),
+(16, 'Aeroport Deberghun', 'MEXIQUE');
 
 -- --------------------------------------------------------
 
@@ -100,8 +101,7 @@ INSERT INTO `avions` (`ID_Avion`, `Modele`, `NombrePlaces`) VALUES
 (7, 'Airbus A550 \"SkyWing\"', 400),
 (8, 'Boeing 899X \"SuperEagle\"', 500),
 (9, 'Lockheed Martin L1000 \"SkyMaster\"', 450),
-(10, 'Bombardier BD1000 \"DreamStar\"', 350),
-(11, 'AIRIBRA', 5);
+(10, 'Bombardier BD1000 \"DreamStar\"', 350);
 
 -- --------------------------------------------------------
 
@@ -298,6 +298,33 @@ INSERT INTO `vols` (`ID_Vol`, `NumeroVol`, `DateDepart`, `HeureDepart`, `Aeropor
 (8, 'GH675', '2024-03-01', '09:00:00', 7, '2024-03-01', '14:00:00', 13, 8),
 (9, 'SQ789', '2024-01-01', '08:00:00', 6, '2024-01-01', '09:17:00', 9, 7);
 
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `vue_vols`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `vue_vols` (
+`ID_Vol` int(11)
+,`NumeroVol` varchar(10)
+,`DateDepart` date
+,`DateArrivee` date
+,`HeureDepart` time
+,`HeureArrivee` time
+,`AeroportDepart` varchar(255)
+,`AeroportArrivee` varchar(255)
+,`Avion` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `vue_vols`
+--
+DROP TABLE IF EXISTS `vue_vols`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vue_vols`  AS SELECT `v`.`ID_Vol` AS `ID_Vol`, `v`.`NumeroVol` AS `NumeroVol`, `v`.`DateDepart` AS `DateDepart`, `v`.`DateArrivee` AS `DateArrivee`, `v`.`HeureDepart` AS `HeureDepart`, `v`.`HeureArrivee` AS `HeureArrivee`, `a`.`Nom` AS `AeroportDepart`, `b`.`Nom` AS `AeroportArrivee`, `av`.`Modele` AS `Avion` FROM (((`vols` `v` join `aeroports` `a` on(`v`.`AeroportDepart` = `a`.`ID_Aeroport`)) join `aeroports` `b` on(`v`.`AeroportArrivee` = `b`.`ID_Aeroport`)) join `avions` `av` on(`v`.`Avion` = `av`.`ID_Avion`))  ;
+
 --
 -- Index pour les tables déchargées
 --
@@ -372,7 +399,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT pour la table `aeroports`
 --
 ALTER TABLE `aeroports`
-  MODIFY `ID_Aeroport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_Aeroport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `avions`
