@@ -22,7 +22,8 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
+CREATE DATABASE airfrance;
+use airfrance;
 --
 -- Structure de la table `admin`
 --
