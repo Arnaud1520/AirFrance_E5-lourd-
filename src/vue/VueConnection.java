@@ -20,8 +20,8 @@ import controleur.Admin;
 
 public class VueConnection extends JFrame implements ActionListener {
 	
-	private JTextField txtEmail = new JTextField("a@gmail.com");
-	private JPasswordField txtMdp = new JPasswordField("123");
+	private JTextField txtEmail = new JTextField();
+	private JPasswordField txtMdp = new JPasswordField();
 	private JButton btAnnuler = new JButton("Annuler");
 	private JButton btSeconnecter = new JButton("Se connecter");
 	private JPanel panelForm = new JPanel();
