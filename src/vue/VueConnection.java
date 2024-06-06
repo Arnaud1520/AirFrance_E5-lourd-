@@ -79,7 +79,7 @@ public class VueConnection extends JFrame implements ActionListener {
 			
 			
 			//on ouvre le logiciel : Vue Générale
-			JOptionPane.showMessageDialog(this, "Bienvenue M/MM" + unUser.getPrenom());
+			JOptionPane.showMessageDialog(this, "Bienvenue M/MM " + unUser.getPrenom());
 			
 			AirFrance_E5.rendreVisibleVueConnection(false);
 			AirFrance_E5.rendreVisibleVueGenerale(true, unUser);
